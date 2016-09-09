@@ -23,7 +23,7 @@ export class CBR {
         for (let i = 0; i < images.length; i++) {
             promiseCollection.push(new Promise((resolve, reject) => {
                 OCRAD(images.item(i), function (text) {
-                    resolve(text);
+                    resolve({ "image": images.item(i), "availableText": text });
                 });
             }));
         }

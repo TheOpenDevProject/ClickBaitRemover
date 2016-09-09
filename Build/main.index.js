@@ -9088,6 +9088,11 @@
 	        x.loadPotentialCollection().then(function (result) {
 	            Promise.all(x.extractTextModelAsync(result)).then(function (values) {
 	                console.log(values);
+	                for (var i = 0; i < values.length; i++) {
+	                    if (values[i].availableText.length > 0) {
+	                        values[i].image.remove();
+	                    }
+	                }
 	            });
 	        });
 	    });
@@ -9143,7 +9148,7 @@
 	            var _loop = function _loop(i) {
 	                promiseCollection.push(new Promise(function (resolve, reject) {
 	                    OCRAD(images.item(i), function (text) {
-	                        resolve(text);
+	                        resolve({ "image": images.item(i), "availableText": text });
 	                    });
 	                }));
 	            };
